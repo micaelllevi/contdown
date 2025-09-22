@@ -2,93 +2,30 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Contador</title>
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#4caf50">
   <link rel="apple-touch-icon" href="icons/icon-192.png">
-  <style>
-    body {
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-between;
-      height: 100vh;
-      font-family: Arial, Helvetica, sans-serif;
-      background: #fff;
-      color: #000;
-    }
-    header {
-      margin-top: 20px;
-      font-size: 22px;
-      font-weight: bold;
-    }
-    main {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      flex-grow: 1;
-    }
-    #count {
-      font-size: 120px;
-      font-weight: bold;
-    }
-    #label {
-      font-size: 22px;
-      font-weight: bold;
-      margin-top: 10px;
-    }
-    .btn {
-      position: fixed;
-      bottom: 30px;
-      width: 70px;
-      height: 70px;
-      border: none;
-      border-radius: 12px;
-      font-size: 40px;
-      font-weight: bold;
-      color: white;
-      cursor: pointer;
-    }
-    #minus { left: 30px; background-color: #ff6b6b; }
-    #plus { right: 30px; background-color: #4caf50; }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>Contador</header>
+  <header>
+    <h1>Contador</h1>
+    <nav><a href="stats.html">📊 Estatísticas</a></nav>
+  </header>
+
   <main>
     <div id="count">0</div>
     <div id="label">vezes</div>
   </main>
-  <button id="minus" class="btn">−</button>
-  <button id="plus" class="btn">+</button>
 
-  <script>
-    let n = 0;
-    const countEl = document.getElementById('count');
-    const labelEl = document.getElementById('label');
-    const plusBtn = document.getElementById('plus');
-    const minusBtn = document.getElementById('minus');
+  <footer>
+    <button id="minus">−</button>
+    <button id="reset">0</button>
+    <button id="plus">+</button>
+  </footer>
 
-    function render() {
-      countEl.textContent = n;
-      labelEl.textContent = n === 1 ? "vez" : "vezes";
-      localStorage.setItem("contador", n);
-    }
-    plusBtn.onclick = () => { n++; render(); };
-    minusBtn.onclick = () => { if(n>0) n--; render(); };
-    document.body.onclick = e => {
-      if (!e.target.classList.contains("btn")) { n++; render(); }
-    };
-    n = parseInt(localStorage.getItem("contador") || "0");
-    render();
-
-    // Registrar o Service Worker
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js');
-    }
-  </script>
+  <script src="app.js"></script>
 </body>
 </html>
